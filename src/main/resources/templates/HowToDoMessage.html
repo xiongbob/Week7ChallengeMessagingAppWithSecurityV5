@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns: sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:fragment="header">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>HowToDoMessage</title>
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <!--My CSS-->
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+        <!--Google Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Belgrano|Flamenco&display=swap" rel="stylesheet">
+    </div>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        body {
+            background: azure;
+
+            /*<!--
+            background: url(https://res.cloudinary.com/dvbavvpr8/image/upload/c_crop,g_faces,h_1926,q_97,w_2889/v1558553606/samples/people/bicycle.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            -->*/
+        }
+
+        th {
+            text-align: left;
+        }
+        .container{
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div th:fragment="navbar">
+        <ul class="nav">
+            <li class="nav-item" id="firstItem">
+                <a class="nav-link active" href="https://www.w3schools.com/html/">HTML</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.w3schools.com/css/">CSS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.w3schools.com/java/">Java</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.w3schools.com/bootstrap/">BootStrap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.w3schools.com/">Others</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Navigation bar-->
+    <div th:insert="base :: navbar"></div>
+
+    <div class="jumbotron">
+        <h1 class="display-4">How to Create a Message Application</h1>
+        <!--<h2>Skills needed as the following:</h2>-->
+        <p class="lead">Skills needed as the following: </p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+
+    <br/>
+    <p>Here are the steps</p>
+    <ul>
+        <li>Create your project</li>
+        <li>Write your HomeController.java</li>
+        <li>Create the html web page</li>
+        <li>Run your application</li>
+        <li>Test it in the browse</li>
+    </ul>
+
+    <!--<h2><p><a href="">Please provide <b>your feedback</b> to us.</a></p></h2>-->
+    <h2><p><a href="">Here is a <b>example</b> for you.</a></p></h2>
+    <!--
+        <br/>
+        <form action="#">
+            Name: <input type="text"><br>
+            Feedback: <textarea cols="54" rows="5"></textarea><br>
+
+            <input type="submit"></input>
+            <button type="button">Cancel</button>
+        </form>
+        <br/>
+        <br/>
+    -->
+    <form action="#"
+          th:action="@{/process}"
+          th:object="${message}"
+          method="post"
+          enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{id}" />
+        Title :<input type="text" th:field="*{title}" />
+        <span th:if="${#fields.hasErrors('title')}"
+              th:errors="*{title}"></span><br />
+
+        Content :<textarea rows="3" th:field="*{content}" />
+        <span th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}"></span><br />
+
+        Posted By :<input type="text" th:field="*{postBy}" />
+        <span th:if="${#fields.hasErrors('postBy')}"
+              th:errors="*{postBy}"></span><br />
+        <input type="file" name="file" /><br/>
+        <input type="submit" value="Submit" />
+    </form>
+
+    <p><b>Our team: </b></p>
+    <!--<table class="table table-striped table-dark table-bordered">-->
+    <!--<table class="table table-hover">-->
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>email</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
