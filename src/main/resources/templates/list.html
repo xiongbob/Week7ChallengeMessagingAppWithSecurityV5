@@ -18,10 +18,13 @@
         <td th:text="${message.content}"></td>
         <td th:text="${message.postBy}"></td>
         <td>
-            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+            <span th:if="${user_id == message.user.id}">
+                <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+            </span>
             <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
-            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
-        </td></tr>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

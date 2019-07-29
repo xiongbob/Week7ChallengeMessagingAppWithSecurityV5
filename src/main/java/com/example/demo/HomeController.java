@@ -72,8 +72,11 @@ public class HomeController {
 
     //add on below for week 7
     @RequestMapping("/")
-    public String listCourses(Model model) {
+    public String listCourses(Model model){
         model.addAttribute("messages", messageRepository.findAll());
+        if(userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "list";
     }
 

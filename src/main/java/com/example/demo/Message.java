@@ -30,6 +30,13 @@ public class Message {
 
     public Message() { user = new User(); }
 
+    public Message(@NotNull @Size(min = 4) String title, @NotNull @Size(min = 10) String content, @NotNull String postBy, User user) {
+        this.setTitle(title);
+        this.setContent(content);
+        this.setPostBy(postBy);
+        this.setUser(user);
+    }
+
     public long getId() {
         return id;
     }
