@@ -3,11 +3,13 @@ package com.example.demo;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 
 //add on for week 7 Challenging
 
 @Entity
+@Table(name="Message")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,4 +78,5 @@ public class Message {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

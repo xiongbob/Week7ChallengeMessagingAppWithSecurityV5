@@ -76,6 +76,7 @@ public class HomeController {
     //add on below for week 7
     @RequestMapping("/")
     public String listCourses(Model model){
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("messages", messageRepository.findAll());
         if(userService.getUser() != null) {
             model.addAttribute("user_id", userService.getUser().getId());
@@ -85,6 +86,7 @@ public class HomeController {
 
     @GetMapping("/add")
     public String messageForm(Model model) {
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("message", new Message());
         //return "messageform";
         return "HowToDoMessage";
@@ -96,6 +98,8 @@ public class HomeController {
             //return "messageform";
             return "HowToDoMessage";
         }
+
+        message.setUser(userService.getUser());
         messageRepository.save(message);
         return "redirect:/";
     }
@@ -124,12 +128,14 @@ public class HomeController {
 
     @RequestMapping("/detail/{id}")
     public String showMessages(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("message", messageRepository.findById(id).get());
         return "show";
     }
 
     @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id,  Model model) {
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("message", messageRepository.findById(id).get());
         //return "messageform";
         return "HowToDoMessage";

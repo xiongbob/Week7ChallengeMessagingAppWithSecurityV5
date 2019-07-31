@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -20,6 +22,8 @@
         <td>
             <span th:if="${user_id == message.user.id}">
                 <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+            </span>
+            <span sec:authorize="hasAuthority('ADMIN')">
                 <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
             </span>
             <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
